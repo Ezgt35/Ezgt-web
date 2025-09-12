@@ -19,13 +19,10 @@
   <meta name="twitter:card" content="summary_large_image">  
   <meta name="twitter:title" content="Ezgt - Profile">  
   <meta name="twitter:description" content="Ezgt Project">  
-  <meta name="twitter:image" content="https://image2url.com/images/1757670704176-27e1831f-dcfe-405c-8928-8b2c4a3432d8.jpeg">    
-
+  <meta property="twitter:image" content="https://image2url.com/images/1757670704176-27e1831f-dcfe-405c-8928-8b2c4a3432d8.jpeg">    
   <link rel="icon" type="image/png" sizes="180x180" href="https://image2url.com/images/1757673521643-7d4de8b8-c3de-486d-92f1-b21e7daa0e38.png">
-
   <script src="https://cdn.tailwindcss.com"></script>    
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">  
-
   <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&family=Share+Tech+Mono&display=swap');
         
@@ -590,13 +587,267 @@
                 font-size: 0.75rem;
             }
         }
+        
+        /* Lyrics styling */
+        .lyric-line {
+            padding: 0.25rem 0;
+            transition: all 0.3s ease;
+            opacity: 0.3;
+        }
+        
+        .lyric-line.active {
+            opacity: 1;
+            color: var(--matrix-green);
+            text-shadow: 0 0 10px var(--matrix-green);
+            transform: scale(1.05);
+        }
+        
+        .lyrics-container {
+            max-height: 300px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--matrix-green) transparent;
+        }
+        
+        .lyrics-container::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .lyrics-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        .lyrics-container::-webkit-scrollbar-thumb {
+            background-color: var(--matrix-green);
+            border-radius: 3px;
+        }
+        
+        /* Footer lyrics display */
+        .footer-lyrics {
+            position: relative;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .song-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+            color: var(--matrix-green);
+            text-shadow: 0 0 10px var(--matrix-green);
+        }
+        
+        .song-title.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .current-lyric {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+        }
+        
+        .current-lyric.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .powered-by {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-top: 1rem;
+        }
+        
+        /* Play button styling */
+        .play-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--neon-blue) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 102, 255, 0.5);
+            margin: 0 auto 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .play-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(0, 102, 255, 0.8);
+        }
+        
+        .play-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .play-button:hover::before {
+            left: 100%;
+        }
+        
+        .play-button i {
+            color: white;
+            font-size: 24px;
+            z-index: 1;
+        }
+        
+        /* Hidden audio player styling */
+        .audio-player {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        /* Audio indicator */
+        .audio-indicator {
+            position: fixed;
+            bottom: 1rem;
+            left: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            z-index: 40;
+            transition: all 0.3s ease;
+        }
+        
+        .audio-indicator:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+        }
+        
+        .audio-indicator.playing {
+            color: var(--matrix-green);
+        }
+        
+        .audio-indicator i {
+            animation: audio-pulse 2s infinite;
+        }
+        
+        @keyframes audio-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Volume control */
+        .volume-control {
+            position: fixed;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 40;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 2rem;
+            font-size: 0.875rem;
+        }
+        
+        .volume-slider {
+            width: 100px;
+            height: 4px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            outline: none;
+        }
+        
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            background: var(--matrix-green);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .volume-slider::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            background: var(--matrix-green);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+        
+        /* Animasi untuk lirik yang muncul */
+        @keyframes lyricFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .lyric-appear {
+            animation: lyricFadeIn 0.8s ease forwards;
+        }
     </style>
 </head>
 <body class="text-white">
+    <!-- Hidden Audio Player -->
+    <audio id="audioPlayer" class="audio-player">
+        <source src="./audio/monolog.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
     <!-- Fake Code Background Animation -->
     <div class="fake-code-bg" id="fakeCodeBg"></div>
     <!-- Background Grid -->
     <div class="fixed inset-0 grid-bg pointer-events-none z-10"></div>
+    
+    <!-- Audio Indicator -->
+    <div id="audioIndicator" class="audio-indicator">
+        <i class="fas fa-music"></i>
+        <span>Click Play Button</span>
+    </div>
+    
+    <!-- Volume Control -->
+    <div class="volume-control">
+        <i class="fas fa-volume-down"></i>
+        <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="50">
+        <i class="fas fa-volume-up"></i>
+    </div>
+    
     <!-- Profile Panel -->
     <div id="profilePanel" class="profile-panel relative z-20 min-h-screen">
         <!-- Header -->
@@ -637,12 +888,12 @@
                 </div>
             </div>
         </header>
-
-      <div class="matrix-font text-lg mb-4 typing-container text-center">
-  <div id="typingMessage" class="typing-text terminal-text">
-    Info Perangkat Anda
-  </div>
-</div>
+      
+        <div class="matrix-font text-lg mb-4 typing-container text-center">
+            <div id="typingMessage" class="typing-text terminal-text">
+                Info Perangkat Anda
+            </div>
+        </div>
       
         <!-- System Info -->
         <section class="py-6">
@@ -656,17 +907,18 @@
                         <span class="text-green-400">IP INTERNET:</span>
                         <span class="text-cyan-400 device-info" id="ipInfo">Mendetect...</span>
                     </div>
-                    <div class="flex justify-between items-center">
+                    <div class="flex justify-between items-center mb-2">
                         <span class="text-green-400">LOKASI:</span>
                         <span class="text-cyan-400 device-info" id="locationInfo">Mendetect...</span>
                     </div>
-                    <div class="flex justify-between items-center mt-2">
+                    <div class="flex justify-between items-center">
                         <span class="text-green-400">TERAKHIR LOGIN:</span>
                         <span class="text-cyan-400 device-info" id="loginTime">Mendetect...</span>
                     </div>
                 </div>
             </div>
         </section>
+        
         <!-- Social Links Section -->
         <section class="py-8">
             <div class="container mx-auto px-4 max-w-md">
@@ -719,18 +971,21 @@
                 </div>
             </div>
         </section>
-        <!-- Terminal Footer -->
+        
+        <!-- Footer with Dynamic Lyrics -->
         <footer class="py-8">
             <div class="container mx-auto px-4 max-w-md">
-                <div class="glass-card p-4 matrix-font text-sm">
-                    <div class="flex items-center space-x-2 mb-2">
-                        <span class="text-green-400">This My Website,</span>
-                        <span class="text-cyan-400">Welcome</span>
+                <div class="glass-card p-4 matrix-font footer-lyrics">
+                    <div id="songTitle" class="song-title">MONOLOG - PAMUNGKAS</div>
+                    <div id="currentLyric" class="current-lyric"></div>
+                    <div class="play-button" id="playButton">
+                        <i class="fas fa-play" id="playIcon"></i>
                     </div>
-                    <p class="text-green-400">Powered By Ezgt</p>
+                    <div class="powered-by">Powered By Ezgt</div>
                 </div>
             </div>
         </footer>
+        
         <!-- Admin Login Button -->
         <div class="hidden md:block fixed bottom-6 right-6 z-30">
             <button onclick="showAdminPanel()" class="admin-button px-6 py-3 rounded-full flex items-center space-x-2 pulse">
@@ -738,12 +993,14 @@
                 <span class="text-sm font-semibold matrix-font">ADMIN</span>
             </button>
         </div>
+        
         <!-- Mobile Admin Button -->
         <div class="admin-button-mobile admin-button">
             <i class="fas fa-terminal text-blue-400"></i>
             <span class="text-sm font-semibold matrix-font">ADMIN</span>
         </div>
     </div>
+    
     <!-- Admin Panel -->
     <div id="adminPanel" class="admin-panel relative z-20 min-h-screen">
         <div class="container mx-auto px-4 py-8">
@@ -758,6 +1015,7 @@
                             <span>BACK</span>
                         </button>
                     </div>
+                    
                     <!-- Login Form -->
                     <div id="loginForm" class="mb-8">
                         <h3 class="text-xl font-semibold mb-6 text-blue-300 matrix-font">AUTHENTICATING...</h3>
@@ -775,6 +1033,7 @@
                             </button>
                         </form>
                     </div>
+                    
                     <!-- Upload Form -->
                     <div id="uploadForm" class="hidden">
                         <h3 class="text-xl font-semibold mb-6 text-blue-300 matrix-font">ADDING NEW LINK...</h3>
@@ -802,6 +1061,7 @@
                             </div>
                         </form>
                     </div>
+                    
                     <!-- Links List -->
                     <div id="linksList" class="mt-8 hidden">
                         <h3 class="text-xl font-semibold mb-6 text-blue-300 matrix-font">LINK DATABASE...</h3>
@@ -813,6 +1073,7 @@
             </div>
         </div>
     </div>
+    
     <script>
         // Fake Code Background Animation
         function createFakeCodeBackground() {
@@ -1155,12 +1416,209 @@
             typingElement.textContent = 'Developer';
         }
         
-        // Initialize effects
+        // LRC Parser and Lyrics Synchronization
+        function parseLRC(lrcText) {
+            const regex = /\[(\d{2}):(\d{2})\.(\d{2})\](.*)/;
+            const lines = lrcText.split('\n');
+            const lyrics = [];
+            
+            for (let i = 0; i < lines.length; i++) {
+                const match = regex.exec(lines[i]);
+                if (match) {
+                    const minutes = parseInt(match[1]);
+                    const seconds = parseInt(match[2]);
+                    const milliseconds = parseInt(match[3]);
+                    const text = match[4].trim();
+                    
+                    if (text) {
+                        lyrics.push({
+                            time: minutes * 60 + seconds + milliseconds / 100,
+                            text: text
+                        });
+                    }
+                }
+            }
+            
+            return lyrics;
+        }
+        
+        // LRC content
+        const lrcContent = `[id: auxmcsoc]
+[ar: Pamungkas]
+[al: Walk The Talk]
+[ti: Monolog]
+[length: 03:27]
+[00:10.15]Gelap di dalam tanya
+[00:19.95]Menyembunyikan rahasianya
+[00:26.24]
+[00:29.99]Letih, kehabisan kata
+[00:39.30]Dan kita pada akhirnya diam
+[00:49.56]Bunga di bulan sepi
+[00:58.15]Jatuh terdampar, tersasar
+[01:05.80]
+[01:09.31]Alasan masih bersama
+[01:12.94]Bukan karena terlanjur lama
+[01:17.96]Tapi rasanya yang masih sama
+[01:26.13]
+[01:29.25]Seperti sejak pertama jumpa
+[01:34.16]Dirimu di kala senja
+[01:37.81]Duduk berdua tanpa suara
+[01:47.92]
+[01:54.07]Rindu yang jatuh di kamarku
+[02:03.91]Hanyalah rindu yang datang padamu
+[02:13.80]Bertanya, mengapa kita
+[02:22.26]Masih di sini tersenyum? Yeah
+[02:33.68]Alasan masih bersama
+[02:37.08]Bukan karena terlanjur lama
+[02:42.13]Tapi rasanya yang masih sama
+[02:50.09]
+[02:53.33]Seperti sejak pertama jumpa
+[02:58.37]Dirimu di kala senja
+[03:01.97]Duduk berdua tanpa suara
+[03:10.99]`;
+        
+        // Parse LRC
+        const lyrics = parseLRC(lrcContent);
+        
+        // Initialize lyrics display
+        function initializeLyrics() {
+            const songTitle = document.getElementById('songTitle');
+            const currentLyricElement = document.getElementById('currentLyric');
+            
+            // Show song title with animation
+            setTimeout(() => {
+                songTitle.classList.add('show');
+            }, 500);
+            
+            currentLyricElement.textContent = '';
+        }
+        
+        // Sync lyrics with audio
+        function syncLyrics() {
+            const audioPlayer = document.getElementById('audioPlayer');
+            const currentLyricElement = document.getElementById('currentLyric');
+            let currentLyricIndex = -1;
+            
+            audioPlayer.addEventListener('timeupdate', () => {
+                const currentTime = audioPlayer.currentTime;
+                
+                // Find the current lyric
+                for (let i = 0; i < lyrics.length; i++) {
+                    if (currentTime >= lyrics[i].time) {
+                        currentLyricIndex = i;
+                    } else {
+                        break;
+                    }
+                }
+                
+                // Update the display with animation
+                if (currentLyricIndex >= 0 && currentLyricIndex < lyrics.length) {
+                    const newLyric = lyrics[currentLyricIndex].text;
+                    
+                    // Only update if the lyric has changed
+                    if (currentLyricElement.textContent !== newLyric) {
+                        // Remove animation class
+                        currentLyricElement.classList.remove('show', 'lyric-appear');
+                        
+                        // Force reflow to reset animation
+                        void currentLyricElement.offsetWidth;
+                        
+                        // Update text and add animation
+                        currentLyricElement.textContent = newLyric;
+                        currentLyricElement.classList.add('lyric-appear');
+                    }
+                } else {
+                    // Clear lyric if not in range
+                    currentLyricElement.textContent = '';
+                    currentLyricElement.classList.remove('show', 'lyric-appear');
+                }
+            });
+            
+            // Handle when audio ends
+            audioPlayer.addEventListener('ended', () => {
+                currentLyricElement.textContent = '';
+                currentLyricElement.classList.remove('show', 'lyric-appear');
+                
+                // Reset play button to play icon
+                const playIcon = document.getElementById('playIcon');
+                playIcon.className = 'fas fa-play';
+                
+                // Update audio indicator
+                const audioIndicator = document.getElementById('audioIndicator');
+                audioIndicator.innerHTML = '<i class="fas fa-music"></i><span>Click Play Button</span>';
+            });
+        }
+        
+        // Volume control
+        function setupVolumeControl() {
+            const volumeSlider = document.getElementById('volumeSlider');
+            const audioPlayer = document.getElementById('audioPlayer');
+            const audioIndicator = document.getElementById('audioIndicator');
+            
+            // Set initial volume
+            audioPlayer.volume = volumeSlider.value / 100;
+            
+            // Update volume when slider changes
+            volumeSlider.addEventListener('input', (e) => {
+                audioPlayer.volume = e.target.value / 100;
+                
+                // Update mute/unmute icon
+                if (e.target.value == 0) {
+                    audioIndicator.innerHTML = '<i class="fas fa-volume-mute"></i><span>Volume Muted</span>';
+                } else {
+                    audioIndicator.innerHTML = '<i class="fas fa-music"></i><span>Music Playing</span>';
+                }
+            });
+            
+            // Handle audio errors
+            audioPlayer.addEventListener('error', (e) => {
+                console.error('Audio error:', e);
+                const audioIndicator = document.getElementById('audioIndicator');
+                audioIndicator.innerHTML = '<i class="fas fa-exclamation-circle"></i><span>Audio Error</span>';
+            });
+        }
+        
+        // Play/Pause button functionality
+        function setupPlayButton() {
+            const playButton = document.getElementById('playButton');
+            const playIcon = document.getElementById('playIcon');
+            const audioPlayer = document.getElementById('audioPlayer');
+            const audioIndicator = document.getElementById('audioIndicator');
+            
+            playButton.addEventListener('click', () => {
+                if (audioPlayer.paused) {
+                    // Play audio
+                    audioPlayer.play().then(() => {
+                        playIcon.className = 'fas fa-pause';
+                        audioIndicator.innerHTML = '<i class="fas fa-music"></i><span>Music Playing</span>';
+                    }).catch(error => {
+                        console.error('Play error:', error);
+                    });
+                } else {
+                    // Pause audio
+                    audioPlayer.pause();
+                    playIcon.className = 'fas fa-play';
+                    audioIndicator.innerHTML = '<i class="fas fa-pause"></i><span>Music Paused</span>';
+                }
+            });
+            
+            // Update play button when audio ends
+            audioPlayer.addEventListener('ended', () => {
+                playIcon.className = 'fas fa-play';
+                audioIndicator.innerHTML = '<i class="fas fa-music"></i><span>Click Play Button</span>';
+            });
+        }
+        
+        // Initialize when DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
             createFakeCodeBackground();
             updateSystemInfo();
             renderLinks();
             startTypingEffect();
+            initializeLyrics();
+            syncLyrics();
+            setupVolumeControl();
+            setupPlayButton();
         });
         
         // Data storage (in real app, this would be from a database)
@@ -1310,13 +1768,4 @@
         }
     </script>
 </body>
-
 </html>
-
-
-
-
-
-
-
-
