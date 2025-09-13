@@ -24,6 +24,7 @@
   <script src="https://cdn.tailwindcss.com"></script>    
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">  
   <style>
+        /* CSS yang sama seperti sebelumnya */
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&family=Share+Tech+Mono&display=swap');
         
         :root {
@@ -411,7 +412,7 @@
         .green-bg-blur {
             background: var(--green-bg);
             backdrop-filter: blur(10px);
-            border: 1px solid var(--green-border);
+            border: 1px var(--green-border);
             border-radius: 12px;
         }
         
@@ -760,51 +761,51 @@
         }
     
         /* Volume control mirip HP */
-.volume-control {
-  position: fixed;
-  top: 50%;
-  right: 1rem;
-  transform: translateY(-50%);
-  z-index: 40;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 0.5rem;
-  background: rgba(30, 30, 30, 0.6);
-  backdrop-filter: blur(10px);
-  border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* Slider vertikal */
-.volume-slider {
-  writing-mode: bt-lr; /* buat vertikal (bawah ke atas) */
-  -webkit-appearance: slider-vertical;
-  width: 6px;
-  height: 120px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 3px;
-  outline: none;
-}
-
-.volume-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 14px;
-  height: 14px;
-  background: #4caf50;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.volume-slider::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
-  background: #4caf50;
-  border-radius: 50%;
-  cursor: pointer;
-  border: none;
-}
+        .volume-control {
+            position: fixed;
+            top: 50%;
+            right: 1rem;
+            transform: translateY(-50%);
+            z-index: 40;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 0.5rem;
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Slider vertikal */
+        .volume-slider {
+            writing-mode: bt-lr; /* buat vertikal (bawah ke atas) */
+            -webkit-appearance: slider-vertical;
+            width: 6px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            outline: none;
+        }
+        
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 14px;
+            height: 14px;
+            background: #4caf50;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .volume-slider::-moz-range-thumb {
+            width: 14px;
+            height: 14px;
+            background: #4caf50;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
         
         /* Animasi untuk lirik yang muncul */
         @keyframes lyricFadeIn {
@@ -820,6 +821,120 @@
         
         .lyric-appear {
             animation: lyricFadeIn 0.8s ease forwards;
+        }
+        
+        /* Loading indicator */
+        .loading-indicator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--matrix-green);
+            animation: spin 1s linear infinite;
+        }
+        
+        /* Error message styling */
+        .error-message {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            color: #ff6b6b;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            display: none;
+        }
+        
+        .error-message.show {
+            display: block;
+        }
+        
+        /* Success message styling */
+        .success-message {
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            color: #4caf50;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            display: none;
+        }
+        
+        .success-message.show {
+            display: block;
+        }
+        
+        /* Folder structure display */
+        .folder-structure {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.875rem;
+        }
+        
+        .folder-item {
+            display: flex;
+            align-items: center;
+            margin: 0.5rem 0;
+            padding: 0.25rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .folder-item:hover {
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 4px;
+            padding-left: 0.5rem;
+        }
+        
+        .folder-icon {
+            color: var(--matrix-green);
+            margin-right: 0.5rem;
+        }
+        
+        .folder-name {
+            color: var(--matrix-green);
+        }
+        
+        .folder-date {
+            margin-left: auto;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.75rem;
+        }
+        
+        /* Sync indicator */
+        .sync-indicator {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            z-index: 40;
+            transition: all 0.3s ease;
+        }
+        
+        .sync-indicator.syncing {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+        }
+        
+        .sync-indicator i {
+            animation: spin 1s linear infinite;
         }
     </style>
 </head>
@@ -839,6 +954,12 @@
     <div id="audioIndicator" class="audio-indicator">
         <i class="fas fa-music"></i>
         <span>Click Play Button</span>
+    </div>
+    
+    <!-- Sync Indicator -->
+    <div id="syncIndicator" class="sync-indicator">
+        <i class="fas fa-sync"></i>
+        <span>Synchronizing...</span>
     </div>
     
     <!-- Volume Control -->
@@ -925,49 +1046,12 @@
                 <h2 class="orbitron text-2xl font-bold text-center mb-8 matrix-font">
                     > Silahkan Pilih...
                 </h2>
-                <div class="space-y-4">
-                    <a href="https://wa.me/6288802747938" target="_blank" class="social-button glass-card flex items-center justify-between p-4">
-                        <div class="flex items-center">
-                            <i class="fab fa-whatsapp text-3xl mr-4 text-green-400"></i>
-                            <span class="font-semibold platform-name">WHATSAPP</span>
-                        </div>
-                        <i class="fas fa-arrow-right text-cyan-400"></i>
-                    </a>
-                    <a href="https://youtube.com/@johndoe" target="_blank" class="social-button glass-card flex items-center justify-between p-4">
-                        <div class="flex items-center">
-                            <i class="fab fa-youtube text-3xl mr-4 text-red-500"></i>
-                            <span class="font-semibold platform-name">YOUTUBE</span>
-                        </div>
-                        <i class="fas fa-arrow-right text-cyan-400"></i>
-                    </a>
-                    <a href="https://instagram.com/johndoe" target="_blank" class="social-button glass-card flex items-center justify-between p-4">
-                        <div class="flex items-center">
-                            <i class="fab fa-instagram text-3xl mr-4 text-pink-500"></i>
-                            <span class="font-semibold platform-name">INSTAGRAM</span>
-                        </div>
-                        <i class="fas fa-arrow-right text-cyan-400"></i>
-                    </a>
-                    <a href="https://github.com/johndoe" target="_blank" class="social-button glass-card flex items-center justify-between p-4">
-                        <div class="flex items-center">
-                            <i class="fab fa-github text-3xl mr-4 text-gray-300"></i>
-                            <span class="font-semibold platform-name">GITHUB</span>
-                        </div>
-                        <i class="fas fa-arrow-right text-cyan-400"></i>
-                    </a>
-                    <a href="https://twitter.com/johndoe" target="_blank" class="social-button glass-card flex items-center justify-between p-4">
-                        <div class="flex items-center">
-                            <i class="fab fa-twitter text-3xl mr-4 text-blue-400"></i>
-                            <span class="font-semibold platform-name">TWITTER</span>
-                        </div>
-                        <i class="fas fa-arrow-right text-cyan-400"></i>
-                    </a>
-                    <a href="https://linkedin.com/in/johndoe" target="_blank" class="social-button glass-card flex items-center justify-between p-4">
-                        <div class="flex items-center">
-                            <i class="fab fa-linkedin text-3xl mr-4 text-blue-600"></i>
-                            <span class="font-semibold platform-name">LINKEDIN</span>
-                        </div>
-                        <i class="fas fa-arrow-right text-cyan-400"></i>
-                    </a>
+                <div id="socialLinksContainer" class="space-y-4">
+                    <!-- Links will be dynamically inserted here -->
+                    <div class="loading-indicator">
+                        <div class="loading-spinner"></div>
+                        <span>Mengambil data...</span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1028,6 +1112,9 @@
                                 <label class="block text-sm font-medium mb-2 text-blue-300 matrix-font">PASSWORD</label>
                                 <input type="password" id="password" class="input-field w-full px-4 py-3 rounded-lg text-white matrix-font" required>
                             </div>
+                            <div id="loginError" class="error-message">
+                                Invalid username or password
+                            </div>
                             <button type="submit" class="neon-button w-full py-3 rounded-lg font-semibold matrix-font">
                                 > LOGIN
                             </button>
@@ -1051,6 +1138,12 @@
                                 <input type="text" id="iconClass" class="input-field w-full px-4 py-3 rounded-lg text-white matrix-font" required placeholder="fab fa-facebook">
                                 <p class="text-xs text-blue-300 mt-1 matrix-font">USE FONT AWESOME CLASS</p>
                             </div>
+                            <div id="uploadError" class="error-message">
+                                Error uploading link
+                            </div>
+                            <div id="uploadSuccess" class="success-message">
+                                Link added successfully!
+                            </div>
                             <div class="flex space-x-4">
                                 <button type="submit" class="neon-button flex-1 py-3 rounded-lg font-semibold matrix-font">
                                     > ADD LINK
@@ -1068,11 +1161,47 @@
                         <div id="adminLinksList" class="space-y-4">
                             <!-- Links list will be dynamically inserted here -->
                         </div>
+                        
+                        <!-- Folder Structure -->
+                        <div class="folder-structure mt-6">
+                            <h4 class="text-green-400 mb-3 matrix-font">
+                                <i class="fas fa-folder-open mr-2"></i>LINK STORAGE STRUCTURE
+                            </h4>
+                            <div id="folderStructure">
+                                <!-- Folder structure will be dynamically inserted here -->
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+        
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyCFD2-XVo3yOQklyuFtO2eIbUu34S4Jw2g",
+          authDomain: "ezgt-953ca.firebaseapp.com",
+          projectId: "ezgt-953ca",
+          storageBucket: "ezgt-953ca.firebasestorage.app",
+          messagingSenderId: "385492338845",
+          appId: "1:385492338845:web:131ee5c3d4f2444d0b6c74",
+          measurementId: "G-VX4EP5TT4V"
+        };
+        
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        const linksRef = ref(database, 'social-links');
+    </script>
     
     <script>
         // Fake Code Background Animation
@@ -1609,11 +1738,124 @@
             });
         }
         
+        // Load links from Firebase
+        async function loadLinksFromFirebase() {
+            showSyncIndicator(true);
+            try {
+                const snapshot = await get(linksRef);
+                if (snapshot.exists()) {
+                    return snapshot.val();
+                } else {
+                    // Return default links if none exist
+                    return [
+                        {
+                            id: 1,
+                            name: "WHATSAPP",
+                            url: "https://wa.me/6288802747938",
+                            icon: "fab fa-whatsapp",
+                            color: "green-500"
+                        },
+                        {
+                            id: 2,
+                            name: "YOUTUBE",
+                            url: "https://youtube.com/@johndoe",
+                            icon: "fab fa-youtube",
+                            color: "red-500"
+                        },
+                        {
+                            id: 3,
+                            name: "INSTAGRAM",
+                            url: "https://instagram.com/johndoe",
+                            icon: "fab fa-instagram",
+                            color: "pink-500"
+                        },
+                        {
+                            id: 4,
+                            name: "GITHUB",
+                            url: "https://github.com/johndoe",
+                            icon: "fab fa-github",
+                            color: "gray-300"
+                        },
+                        {
+                            id: 5,
+                            name: "TWITTER",
+                            url: "https://twitter.com/johndoe",
+                            icon: "fab fa-twitter",
+                            color: "blue-400"
+                        },
+                        {
+                            id: 6,
+                            name: "LINKEDIN",
+                            url: "https://linkedin.com/in/johndoe",
+                            icon: "fab fa-linkedin",
+                            color: "blue-600"
+                        }
+                    ];
+                }
+            } catch (error) {
+                console.error('Error loading links from Firebase:', error);
+                throw error;
+            } finally {
+                showSyncIndicator(false);
+            }
+        }
+        
+        // Save links to Firebase
+        async function saveLinksToFirebase(links) {
+            showSyncIndicator(true);
+            try {
+                await set(linksRef, links);
+                return true;
+            } catch (error) {
+                console.error('Error saving links to Firebase:', error);
+                throw error;
+            } finally {
+                showSyncIndicator(false);
+            }
+        }
+        
+        // Show/hide sync indicator
+        function showSyncIndicator(showing) {
+            const indicator = document.getElementById('syncIndicator');
+            if (showing) {
+                indicator.classList.add('syncing');
+                indicator.innerHTML = '<i class="fas fa-sync"></i><span>Synchronizing...</span>';
+            } else {
+                indicator.classList.remove('syncing');
+                indicator.innerHTML = '<i class="fas fa-check-circle"></i><span>Synchronized</span>';
+                setTimeout(() => {
+                    indicator.style.display = 'none';
+                }, 2000);
+            }
+        }
+        
+        // Load links and render
+        async function loadAndRenderLinks() {
+            try {
+                const socialLinks = await loadLinksFromFirebase();
+                renderLinks(socialLinks);
+                return socialLinks;
+            } catch (error) {
+                console.error('Error loading links:', error);
+                // Show error message
+                const container = document.getElementById('socialLinksContainer');
+                container.innerHTML = `
+                    <div class="error-message show">
+                        Failed to load social links. Please try again later.
+                    </div>
+                `;
+                return [];
+            }
+        }
+        
         // Initialize when DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
             createFakeCodeBackground();
             updateSystemInfo();
-            renderLinks();
+            
+            // Load and render links
+            loadAndRenderLinks();
+            
             startTypingEffect();
             initializeLyrics();
             syncLyrics();
@@ -1621,55 +1863,10 @@
             setupPlayButton();
         });
         
-        // Data storage (in real app, this would be from a database)
-        let socialLinks = [
-            {
-                id: 1,
-                name: "WHATSAPP",
-                url: "https://wa.me/6288802747938",
-                icon: "fab fa-whatsapp",
-                color: "green-500"
-            },
-            {
-                id: 2,
-                name: "YOUTUBE",
-                url: "https://youtube.com/@johndoe",
-                icon: "fab fa-youtube",
-                color: "red-500"
-            },
-            {
-                id: 3,
-                name: "INSTAGRAM",
-                url: "https://instagram.com/johndoe",
-                icon: "fab fa-instagram",
-                color: "pink-500"
-            },
-            {
-                id: 4,
-                name: "GITHUB",
-                url: "https://github.com/johndoe",
-                icon: "fab fa-github",
-                color: "gray-300"
-            },
-            {
-                id: 5,
-                name: "TWITTER",
-                url: "https://twitter.com/johndoe",
-                icon: "fab fa-twitter",
-                color: "blue-400"
-            },
-            {
-                id: 6,
-                name: "LINKEDIN",
-                url: "https://linkedin.com/in/johndoe",
-                icon: "fab fa-linkedin",
-                color: "blue-600"
-            }
-        ];
-        let isLoggedIn = false;
-        function renderLinks() {
-            const container = document.querySelector('.space-y-4');
-            container.innerHTML = socialLinks.map(link => `
+        // Render social links
+        function renderLinks(links) {
+            const container = document.getElementById('socialLinksContainer');
+            container.innerHTML = links.map(link => `
                 <a href="${link.url}" target="_blank" class="social-button glass-card flex items-center justify-between p-4">
                     <div class="flex items-center">
                         <i class="${link.icon} text-3xl mr-4"></i>
@@ -1679,64 +1876,115 @@
                 </a>
             `).join('');
         }
+        
+        // Show admin panel
         function showAdminPanel() {
             document.getElementById('profilePanel').classList.add('hidden');
             document.getElementById('adminPanel').classList.add('active');
             showLogin();
         }
+        
+        // Show profile panel
         function showProfilePanel() {
             document.getElementById('adminPanel').classList.remove('active');
             document.getElementById('profilePanel').classList.remove('hidden');
         }
+        
+        // Show login form
         function showLogin() {
             document.getElementById('loginForm').classList.remove('hidden');
             document.getElementById('uploadForm').classList.add('hidden');
             document.getElementById('linksList').classList.add('hidden');
-            isLoggedIn = false;
+            document.getElementById('loginError').classList.remove('show');
         }
+        
+        // Handle login
         function handleLogin(event) {
             event.preventDefault();
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
+            
             // Simple authentication (in real app, use proper auth)
             if (username === 'Ezgt' && password === 'Ezgt95') {
                 isLoggedIn = true;
                 document.getElementById('loginForm').classList.add('hidden');
                 document.getElementById('uploadForm').classList.remove('hidden');
                 document.getElementById('linksList').classList.remove('hidden');
-                renderAdminLinksList();
+                document.getElementById('loginError').classList.remove('show');
+                
+                // Load links and render admin list
+                loadAndRenderLinks().then(links => {
+                    renderAdminLinksList(links);
+                    renderFolderStructure(links);
+                });
             } else {
-                alert('ACCESS DENIED');
+                // Show error message
+                document.getElementById('loginError').classList.add('show');
             }
         }
-        function handleUpload(event) {
+        
+        // Handle link upload
+        async function handleUpload(event) {
             event.preventDefault();
             const name = document.getElementById('platformName').value;
             const url = document.getElementById('platformUrl').value;
             const icon = document.getElementById('iconClass').value;
             
+            // Load existing links
+            let socialLinks = await loadLinksFromFirebase();
+            
+            // Create new link
             const newLink = {
-                id: socialLinks.length + 1,
+                id: socialLinks.length > 0 ? Math.max(...socialLinks.map(l => l.id)) + 1 : 1,
                 name: name.toUpperCase(),
                 url: url,
                 icon: icon,
-                color: "blue-400" // Warna default biru
+                color: "blue-400", // Default color
+                createdAt: new Date().toISOString()
             };
             
+            // Add to links array
             socialLinks.push(newLink);
-            renderLinks();
-            renderAdminLinksList();
             
-            // Reset form
-            document.getElementById('platformName').value = '';
-            document.getElementById('platformUrl').value = '';
-            document.getElementById('iconClass').value = '';
-            
-            alert('LINK ADDED SUCCESSFULLY');
+            // Save to Firebase
+            try {
+                await saveLinksToFirebase(socialLinks);
+                
+                // Re-render links in profile
+                renderLinks(socialLinks);
+                
+                // Re-render admin links list
+                renderAdminLinksList(socialLinks);
+                
+                // Re-render folder structure
+                renderFolderStructure(socialLinks);
+                
+                // Reset form
+                document.getElementById('platformName').value = '';
+                document.getElementById('platformUrl').value = '';
+                document.getElementById('iconClass').value = '';
+                
+                // Show success message
+                const successMsg = document.getElementById('uploadSuccess');
+                successMsg.classList.add('show');
+                setTimeout(() => {
+                    successMsg.classList.remove('show');
+                }, 3000);
+                
+            } catch (error) {
+                // Show error message
+                const errorMsg = document.getElementById('uploadError');
+                errorMsg.classList.add('show');
+                setTimeout(() => {
+                    errorMsg.classList.remove('show');
+                }, 3000);
+            }
         }
-        function renderAdminLinksList() {
+        
+        // Render admin links list
+        function renderAdminLinksList(links) {
             const container = document.getElementById('adminLinksList');
-            container.innerHTML = socialLinks.map(link => `
+            container.innerHTML = links.map(link => `
                 <div class="glass-card p-4 matrix-font text-sm">
                     <div class="flex justify-between items-start">
                         <div class="flex-1">
@@ -1746,6 +1994,7 @@
                             </div>
                             <p class="text-sm text-blue-300">${link.url}</p>
                             <p class="text-xs text-blue-400 mt-1">COLOR: ${link.color}</p>
+                            ${link.createdAt ? `<p class="text-xs text-gray-400 mt-1">Created: ${new Date(link.createdAt).toLocaleString('id-ID')}</p>` : ''}
                         </div>
                         <div class="flex space-x-2">
                             <a href="${link.url}" target="_blank" class="text-cyan-400 hover:text-cyan-300">
@@ -1759,14 +2008,53 @@
                 </div>
             `).join('');
         }
-        function deleteLink(id) {
+        
+        // Render folder structure
+        function renderFolderStructure(links) {
+            const container = document.getElementById('folderStructure');
+            const sortedLinks = [...links].sort((a, b) => {
+                if (a.createdAt && b.createdAt) {
+                    return new Date(b.createdAt) - new Date(a.createdAt);
+                }
+                return 0;
+            });
+            
+            container.innerHTML = sortedLinks.map(link => `
+                <div class="folder-item">
+                    <i class="fas fa-folder folder-icon"></i>
+                    <span class="folder-name">${link.name}</span>
+                    <span class="folder-date">${link.createdAt ? new Date(link.createdAt).toLocaleDateString('id-ID') : '-'}</span>
+                </div>
+            `).join('');
+        }
+        
+        // Delete link
+        async function deleteLink(id) {
             if (confirm('DELETE LINK?')) {
-                socialLinks = socialLinks.filter(l => l.id !== id);
-                renderLinks();
-                renderAdminLinksList();
+                try {
+                    // Load existing links
+                    let socialLinks = await loadLinksFromFirebase();
+                    
+                    // Filter out the link to delete
+                    socialLinks = socialLinks.filter(l => l.id !== id);
+                    
+                    // Save to Firebase
+                    await saveLinksToFirebase(socialLinks);
+                    
+                    // Re-render links in profile
+                    renderLinks(socialLinks);
+                    
+                    // Re-render admin links list
+                    renderAdminLinksList(socialLinks);
+                    
+                    // Re-render folder structure
+                    renderFolderStructure(socialLinks);
+                    
+                } catch (error) {
+                    alert('Failed to delete link');
+                }
             }
         }
     </script>
 </body>
 </html>
-
