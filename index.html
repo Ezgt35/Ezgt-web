@@ -133,38 +133,6 @@
             border-color: var(--neon-blue);
         }
         
-        .neon-button {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--neon-blue) 100%);
-            box-shadow: 
-                0 0 20px rgba(0, 212, 255, 0.5),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.2);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .neon-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s ease;
-        }
-        
-        .neon-button:hover::before {
-            left: 100%;
-        }
-        
-        .neon-button:hover {
-            box-shadow: 
-                0 0 30px rgba(0, 212, 255, 0.8),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.4);
-            transform: translateY(-2px);
-        }
-        
         .social-button {
             background: linear-gradient(135deg, rgba(0, 102, 255, 0.2) 0%, rgba(0, 212, 255, 0.2) 100%);
             border: 1px solid var(--glass-border);
@@ -198,54 +166,12 @@
             transform: translateX(10px);
         }
         
-        .admin-panel {
-            display: none;
-        }
-        
-        .admin-panel.active {
-            display: block;
-        }
-        
-        .profile-panel {
-            display: block;
-        }
-        
-        .profile-panel.hidden {
-            display: none;
-        }
-        
         .grid-bg {
             background-image: 
                 linear-gradient(rgba(0, 102, 255, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 102, 255, 0.1) 1px, transparent 1px);
+                linear-gradient(90deg, rgba(0, 102, 255, 0.1) px, transparent 1px);
             background-size: 50px 50px;
             opacity: 0.1;
-        }
-        
-        .input-field {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-        
-        .input-field:focus {
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
-            outline: none;
-        }
-        
-        .admin-button {
-            background: rgba(0, 102, 255, 0.1);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-        
-        .admin-button:hover {
-            background: rgba(0, 102, 255, 0.2);
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
         }
         
         .pulse {
@@ -551,25 +477,6 @@
             white-space: nowrap;
         }
         
-        .admin-button-mobile {
-            position: fixed;
-            bottom: 1rem;
-            right: 1rem;
-            z-index: 50;
-            padding: 0.5rem 1rem;
-            border-radius: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.75rem;
-        }
-        
-        @media (min-width: 769px) {
-            .admin-button-mobile {
-                display: none;
-            }
-        }
-        
         @media (max-width: 768px) {
             .container {
                 padding-left: 1rem;
@@ -760,51 +667,48 @@
         }
     
         /* Volume control mirip HP */
-.volume-control {
-  position: fixed;
-  top: 50%;
-  right: 1rem;
-  transform: translateY(-50%);
-  z-index: 40;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 0.5rem;
-  background: rgba(30, 30, 30, 0.6);
-  backdrop-filter: blur(10px);
-  border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* Slider vertikal */
-.volume-slider {
-  writing-mode: bt-lr; /* buat vertikal (bawah ke atas) */
-  -webkit-appearance: slider-vertical;
-  width: 6px;
-  height: 120px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 3px;
-  outline: none;
-}
-
-.volume-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 14px;
-  height: 14px;
-  background: #4caf50;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.volume-slider::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
-  background: #4caf50;
-  border-radius: 50%;
-  cursor: pointer;
-  border: none;
-}
+        .volume-control {
+          position: fixed;
+          top: 50%;
+          right: 1rem;
+          transform: translateY(-50%);
+          z-index: 40;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 1rem 0.5rem;
+          background: rgba(30, 30, 30, 0.6);
+          backdrop-filter: blur(10px);
+          border-radius: 1rem;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        /* Slider vertikal */
+        .volume-slider {
+          writing-mode: bt-lr; /* buat vertikal (bawah ke atas) */
+          -webkit-appearance: slider-vertical;
+          width: 6px;
+          height: 120px;
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 3px;
+          outline: none;
+        }
+        .volume-slider::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          width: 14px;
+          height: 14px;
+          background: #4caf50;
+          border-radius: 50%;
+          cursor: pointer;
+        }
+        .volume-slider::-moz-range-thumb {
+          width: 14px;
+          height: 14px;
+          background: #4caf50;
+          border-radius: 50%;
+          cursor: pointer;
+          border: none;
+        }
         
         /* Animasi untuk lirik yang muncul */
         @keyframes lyricFadeIn {
@@ -985,93 +889,6 @@
                 </div>
             </div>
         </footer>
-        
-        <!-- Admin Login Button -->
-        <div class="hidden md:block fixed bottom-6 right-6 z-30">
-            <button onclick="showAdminPanel()" class="admin-button px-6 py-3 rounded-full flex items-center space-x-2 pulse">
-                <i class="fas fa-terminal text-blue-400"></i>
-                <span class="text-sm font-semibold matrix-font">ADMIN</span>
-            </button>
-        </div>
-        
-        <!-- Mobile Admin Button -->
-        <div class="admin-button-mobile admin-button">
-            <i class="fas fa-terminal text-blue-400"></i>
-            <span class="text-sm font-semibold matrix-font">ADMIN</span>
-        </div>
-    </div>
-    
-    <!-- Admin Panel -->
-    <div id="adminPanel" class="admin-panel relative z-20 min-h-screen">
-        <div class="container mx-auto px-4 py-8">
-            <div class="max-w-4xl mx-auto">
-                <div class="glass-card p-8">
-                    <div class="flex justify-between items-center mb-8">
-                        <h2 class="orbitron text-3xl font-bold text-blue-300 matrix-font">
-                            > ACCESSING ADMIN PANEL...
-                        </h2>
-                        <button onclick="showProfilePanel()" class="admin-button px-4 py-2 rounded-full flex items-center space-x-2">
-                            <i class="fas fa-arrow-left text-blue-400"></i>
-                            <span>BACK</span>
-                        </button>
-                    </div>
-                    
-                    <!-- Login Form -->
-                    <div id="loginForm" class="mb-8">
-                        <h3 class="text-xl font-semibold mb-6 text-blue-300 matrix-font">AUTHENTICATING...</h3>
-                        <form onsubmit="handleLogin(event)" class="space-y-6">
-                            <div>
-                                <label class="block text-sm font-medium mb-2 text-blue-300 matrix-font">USERNAME</label>
-                                <input type="text" id="username" class="input-field w-full px-4 py-3 rounded-lg text-white matrix-font" required>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium mb-2 text-blue-300 matrix-font">PASSWORD</label>
-                                <input type="password" id="password" class="input-field w-full px-4 py-3 rounded-lg text-white matrix-font" required>
-                            </div>
-                            <button type="submit" class="neon-button w-full py-3 rounded-lg font-semibold matrix-font">
-                                > LOGIN
-                            </button>
-                        </form>
-                    </div>
-                    
-                    <!-- Upload Form -->
-                    <div id="uploadForm" class="hidden">
-                        <h3 class="text-xl font-semibold mb-6 text-blue-300 matrix-font">ADDING NEW LINK...</h3>
-                        <form onsubmit="handleUpload(event)" class="space-y-6">
-                            <div>
-                                <label class="block text-sm font-medium mb-2 text-blue-300 matrix-font">PLATFORM NAME</label>
-                                <input type="text" id="platformName" class="input-field w-full px-4 py-3 rounded-lg text-white matrix-font" required placeholder="ENTER PLATFORM NAME">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium mb-2 text-blue-300 matrix-font">URL LINK</label>
-                                <input type="url" id="platformUrl" class="input-field w-full px-4 py-3 rounded-lg text-white matrix-font" required placeholder="https://...">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium mb-2 text-blue-300 matrix-font">ICON CLASS</label>
-                                <input type="text" id="iconClass" class="input-field w-full px-4 py-3 rounded-lg text-white matrix-font" required placeholder="fab fa-facebook">
-                                <p class="text-xs text-blue-300 mt-1 matrix-font">USE FONT AWESOME CLASS</p>
-                            </div>
-                            <div class="flex space-x-4">
-                                <button type="submit" class="neon-button flex-1 py-3 rounded-lg font-semibold matrix-font">
-                                    > ADD LINK
-                                </button>
-                                <button type="button" onclick="showLogin()" class="admin-button flex-1 py-3 rounded-lg font-semibold matrix-font">
-                                    > LOGOUT
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                    
-                    <!-- Links List -->
-                    <div id="linksList" class="mt-8 hidden">
-                        <h3 class="text-xl font-semibold mb-6 text-blue-300 matrix-font">LINK DATABASE...</h3>
-                        <div id="adminLinksList" class="space-y-4">
-                            <!-- Links list will be dynamically inserted here -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     
     <script>
@@ -1613,160 +1430,12 @@
         document.addEventListener('DOMContentLoaded', () => {
             createFakeCodeBackground();
             updateSystemInfo();
-            renderLinks();
             startTypingEffect();
             initializeLyrics();
             syncLyrics();
             setupVolumeControl();
             setupPlayButton();
         });
-        
-        // Data storage (in real app, this would be from a database)
-        let socialLinks = [
-            {
-                id: 1,
-                name: "WHATSAPP",
-                url: "https://wa.me/6288802747938",
-                icon: "fab fa-whatsapp",
-                color: "green-500"
-            },
-            {
-                id: 2,
-                name: "YOUTUBE",
-                url: "https://youtube.com/@johndoe",
-                icon: "fab fa-youtube",
-                color: "red-500"
-            },
-            {
-                id: 3,
-                name: "INSTAGRAM",
-                url: "https://instagram.com/johndoe",
-                icon: "fab fa-instagram",
-                color: "pink-500"
-            },
-            {
-                id: 4,
-                name: "GITHUB",
-                url: "https://github.com/johndoe",
-                icon: "fab fa-github",
-                color: "gray-300"
-            },
-            {
-                id: 5,
-                name: "TWITTER",
-                url: "https://twitter.com/johndoe",
-                icon: "fab fa-twitter",
-                color: "blue-400"
-            },
-            {
-                id: 6,
-                name: "LINKEDIN",
-                url: "https://linkedin.com/in/johndoe",
-                icon: "fab fa-linkedin",
-                color: "blue-600"
-            }
-        ];
-        let isLoggedIn = false;
-        function renderLinks() {
-            const container = document.querySelector('.space-y-4');
-            container.innerHTML = socialLinks.map(link => `
-                <a href="${link.url}" target="_blank" class="social-button glass-card flex items-center justify-between p-4">
-                    <div class="flex items-center">
-                        <i class="${link.icon} text-3xl mr-4"></i>
-                        <span class="font-semibold platform-name">${link.name}</span>
-                    </div>
-                    <i class="fas fa-arrow-right text-cyan-400"></i>
-                </a>
-            `).join('');
-        }
-        function showAdminPanel() {
-            document.getElementById('profilePanel').classList.add('hidden');
-            document.getElementById('adminPanel').classList.add('active');
-            showLogin();
-        }
-        function showProfilePanel() {
-            document.getElementById('adminPanel').classList.remove('active');
-            document.getElementById('profilePanel').classList.remove('hidden');
-        }
-        function showLogin() {
-            document.getElementById('loginForm').classList.remove('hidden');
-            document.getElementById('uploadForm').classList.add('hidden');
-            document.getElementById('linksList').classList.add('hidden');
-            isLoggedIn = false;
-        }
-        function handleLogin(event) {
-            event.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            // Simple authentication (in real app, use proper auth)
-            if (username === 'Ezgt' && password === 'Ezgt95') {
-                isLoggedIn = true;
-                document.getElementById('loginForm').classList.add('hidden');
-                document.getElementById('uploadForm').classList.remove('hidden');
-                document.getElementById('linksList').classList.remove('hidden');
-                renderAdminLinksList();
-            } else {
-                alert('ACCESS DENIED');
-            }
-        }
-        function handleUpload(event) {
-            event.preventDefault();
-            const name = document.getElementById('platformName').value;
-            const url = document.getElementById('platformUrl').value;
-            const icon = document.getElementById('iconClass').value;
-            
-            const newLink = {
-                id: socialLinks.length + 1,
-                name: name.toUpperCase(),
-                url: url,
-                icon: icon,
-                color: "blue-400" // Warna default biru
-            };
-            
-            socialLinks.push(newLink);
-            renderLinks();
-            renderAdminLinksList();
-            
-            // Reset form
-            document.getElementById('platformName').value = '';
-            document.getElementById('platformUrl').value = '';
-            document.getElementById('iconClass').value = '';
-            
-            alert('LINK ADDED SUCCESSFULLY');
-        }
-        function renderAdminLinksList() {
-            const container = document.getElementById('adminLinksList');
-            container.innerHTML = socialLinks.map(link => `
-                <div class="glass-card p-4 matrix-font text-sm">
-                    <div class="flex justify-between items-start">
-                        <div class="flex-1">
-                            <div class="flex items-center mb-2">
-                                <i class="${link.icon} text-xl mr-2"></i>
-                                <h4 class="font-semibold platform-name">${link.name}</h4>
-                            </div>
-                            <p class="text-sm text-blue-300">${link.url}</p>
-                            <p class="text-xs text-blue-400 mt-1">COLOR: ${link.color}</p>
-                        </div>
-                        <div class="flex space-x-2">
-                            <a href="${link.url}" target="_blank" class="text-cyan-400 hover:text-cyan-300">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                            <button onclick="deleteLink(${link.id})" class="text-red-400 hover:text-red-300">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-        function deleteLink(id) {
-            if (confirm('DELETE LINK?')) {
-                socialLinks = socialLinks.filter(l => l.id !== id);
-                renderLinks();
-                renderAdminLinksList();
-            }
-        }
     </script>
 </body>
 </html>
-
